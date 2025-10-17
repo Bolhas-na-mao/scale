@@ -19,7 +19,7 @@ import { atom } from './subatomic/atom';
 import { nucleus } from './subatomic/nucleus';
 import { quark } from './subatomic/quark';
 
-export const subjects: Subject[] = [
+const list: Subject[] = [
   quark,
   nucleus,
   atom,
@@ -40,3 +40,14 @@ export const subjects: Subject[] = [
   cluster,
   universe,
 ];
+
+let previous: Subject | null = null;
+let current: Subject = list[0];
+let next: Subject | null = list[1];
+
+export const subjects = {
+  list,
+  current,
+  previous,
+  next,
+};
