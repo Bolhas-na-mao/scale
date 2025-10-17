@@ -52,6 +52,7 @@ function animate() {
     subjects.setPrevious();
 
     scale.zoom.current = 0.1;
+    scale.zoom.target = 0;
   }
 
   if (scale.zoom.current < 0.1 && subjects.previous) {
@@ -61,6 +62,7 @@ function animate() {
     subjects.setNext();
 
     scale.zoom.current = 6;
+    scale.zoom.target = 0;
   }
 
   subjects.current.scale.setScalar(scale.zoom.current);
