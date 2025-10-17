@@ -22,3 +22,5 @@ document.body.appendChild(renderer.domElement);
 const quarkMesh = quark.get();
 
 scene.add(quarkMesh);
+
+renderer.render(scene, camera);
