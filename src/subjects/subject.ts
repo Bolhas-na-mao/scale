@@ -41,31 +41,23 @@ const list: Subject[] = [
   universe,
 ];
 
-let previous: Subject | null = null;
-let current: Subject = list[0];
-let next: Subject | null = list[1];
-
-function moveFoward() {
-  const currentIndex = list.indexOf(current);
-
-  previous = list[currentIndex];
-  current = list[currentIndex + 1];
-  next = list[currentIndex + 2];
-}
-
-function moveBackwards() {
-  const currentIndex = list.indexOf(current);
-
-  previous = list[currentIndex - 2];
-  current = list[currentIndex - 1];
-  next = list[currentIndex];
-}
+let currentIndex = 0;
 
 export const subjects = {
   list,
-  current,
-  previous,
-  next,
-  moveFoward,
-  moveBackwards,
+  get current() {
+    return list[currentIndex];
+  },
+  get previous() {
+    return currentIndex > 0 ? list[currentIndex - 1] : null;
+  },
+  get next() {
+    return currentIndex < list.length - 1 ? list[currentIndex + 1] : null;
+  },
+  setNext() {
+    if (currentIndex < list.length - 1) currentIndex++;
+  },
+  setPrevious() {
+    if (currentIndex > 0) currentIndex--;
+  },
 };
