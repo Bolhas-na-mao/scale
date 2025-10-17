@@ -1,6 +1,7 @@
 import './style.css';
 import * as THREE from 'three';
 import { quark } from './subjects/subatomic/quark';
+import { scale } from './utils.ts/scale';
 
 const scene = new THREE.Scene();
 
@@ -33,7 +34,12 @@ scene.add(quarkMesh);
 
 function animate() {
   requestAnimationFrame(animate);
+
+  scale.zoom.current += (scale.zoom.target - scale.zoom.current) * 0.1;
+
   renderer.render(scene, camera);
+
+  quarkMesh.scale.setScalar(scale.zoom.current);
 }
 
 animate();
