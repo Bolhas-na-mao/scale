@@ -2,6 +2,9 @@ import * as THREE from 'three';
 
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 
-const material = new THREE.MeshBasicMaterial({ color: 0xffd700 });
+const material = new THREE.MeshBasicMaterial({
+  color: 0xffd700,
+  transparent: true,
+});
 
 export const organicMolecule = new THREE.Mesh(geometry, material);
