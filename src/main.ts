@@ -11,6 +11,12 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+
 camera.position.z = 5;
 
 const renderer = new THREE.WebGLRenderer();
