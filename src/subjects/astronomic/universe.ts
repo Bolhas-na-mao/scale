@@ -3,8 +3,8 @@ import * as THREE from 'three';
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 
 const material = new THREE.MeshBasicMaterial({
-  color: 0x00ff00,
+  color: 0xfaf0e6,
   transparent: true,
 });
 
-export const quark = new THREE.Mesh(geometry, material);
+export const universe = new THREE.Mesh(geometry, material);

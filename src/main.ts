@@ -1,6 +1,7 @@
 import './style.css';
 import * as THREE from 'three';
-import { quark } from './subjects/subatomic/quark';
+import { scale } from './utils.ts/scale';
+import { subjects } from './subjects/subject';
 
 const scene = new THREE.Scene();
 
@@ -27,13 +28,43 @@ document
   .querySelector<HTMLDivElement>('#app')!
   .appendChild(renderer.domElement);
 
-const quarkMesh = quark.get();
-
-scene.add(quarkMesh);
+scene.add(subjects.current);
 
 function animate() {
   requestAnimationFrame(animate);
+
+  scale.zoom.current += (scale.zoom.target - scale.zoom.current) * 0.1;
+
   renderer.render(scene, camera);
+
+  const material = subjects.current.material as THREE.MeshBasicMaterial;
+
+  if (scale.zoom.current > 5) material.opacity = 1 / scale.zoom.current;
+
+  if (scale.zoom.current < 1) material.opacity = scale.zoom.current / 1.5;
+
+  if (scale.zoom.current > 1 && scale.zoom.current < 5)
+    material.opacity = 1 / scale.zoom.current;
+
+  if (scale.zoom.current > 6 && subjects.next) {
+    scene.remove(subjects.current);
+    scene.add(subjects.next);
+
+    subjects.moveBackwards();
+
+    scale.zoom.current = 0.1;
+  }
+
+  if (scale.zoom.current < 0.1 && subjects.previous) {
+    scene.remove(subjects.current);
+    scene.add(subjects.previous);
+
+    subjects.moveFoward();
+
+    scale.zoom.current = 6;
+  }
+
+  subjects.current.scale.setScalar(scale.zoom.current);
 }
 
 animate();
