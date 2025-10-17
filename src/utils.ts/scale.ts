@@ -12,7 +12,7 @@ window.addEventListener('wheel', (event: WheelEvent) => {
     zoom.target -= 0.1;
   }
 
-  zoom.target = Math.max(0.5, Math.min(3, zoom.target));
+  zoom.target = Math.max(0.01, zoom.target);
 });
 
 export const scale = { zoom };
