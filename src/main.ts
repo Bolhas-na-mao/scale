@@ -49,7 +49,7 @@ function animate() {
     scene.remove(subjects.current);
     scene.add(subjects.next);
 
-    subjects.setPrevious();
+    subjects.setNext();
 
     scale.zoom.current = 0.1;
     scale.zoom.target = 0;
@@ -59,7 +59,7 @@ function animate() {
     scene.remove(subjects.current);
     scene.add(subjects.previous);
 
-    subjects.setNext();
+    subjects.setPrevious();
 
     scale.zoom.current = 6;
     scale.zoom.target = 0;
