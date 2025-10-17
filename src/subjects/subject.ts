@@ -45,9 +45,27 @@ let previous: Subject | null = null;
 let current: Subject = list[0];
 let next: Subject | null = list[1];
 
+function moveFoward() {
+  const currentIndex = list.indexOf(current);
+
+  previous = list[currentIndex];
+  current = list[currentIndex + 1];
+  next = list[currentIndex + 2];
+}
+
+function moveBackwards() {
+  const currentIndex = list.indexOf(current);
+
+  previous = list[currentIndex - 2];
+  current = list[currentIndex - 1];
+  next = list[currentIndex];
+}
+
 export const subjects = {
   list,
   current,
   previous,
   next,
+  moveFoward,
+  moveBackwards,
 };
