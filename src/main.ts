@@ -40,7 +40,7 @@ function animate() {
   const material = subjects.current.material as THREE.MeshBasicMaterial;
 
   material.opacity =
-    scale.zoom.current < 1 ? scale.zoom.current * 0.67 : 1 / scale.zoom.current;
+    scale.zoom.current < 1 ? scale.zoom.current * 0.9 : 1 / scale.zoom.current;
 
   if (scale.zoom.current > 6 && subjects.next) {
     scene.remove(subjects.current);
