@@ -1,5 +1,6 @@
 import './style.css';
 import * as THREE from 'three';
+import { quark } from './subjects/subatomic/quark';
 
 const scene = new THREE.Scene();
 
@@ -17,3 +18,7 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 
 document.body.appendChild(renderer.domElement);
+
+const quarkMesh = quark.get();
+
+scene.add(quarkMesh);
