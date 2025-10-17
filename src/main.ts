@@ -39,18 +39,17 @@ function animate() {
 
   const material = subjects.current.material as THREE.MeshBasicMaterial;
 
-  if (scale.zoom.current > 5) material.opacity = 1 / scale.zoom.current;
-
-  if (scale.zoom.current < 1) material.opacity = scale.zoom.current / 1.5;
-
-  if (scale.zoom.current > 1 && scale.zoom.current < 5)
+  if (scale.zoom.current < 1) {
+    material.opacity = scale.zoom.current / 1.5;
+  } else {
     material.opacity = 1 / scale.zoom.current;
+  }
 
   if (scale.zoom.current > 6 && subjects.next) {
     scene.remove(subjects.current);
     scene.add(subjects.next);
 
-    subjects.moveBackwards();
+    subjects.setPrevious();
 
     scale.zoom.current = 0.1;
   }
@@ -59,7 +58,7 @@ function animate() {
     scene.remove(subjects.current);
     scene.add(subjects.previous);
 
-    subjects.moveFoward();
+    subjects.setNext();
 
     scale.zoom.current = 6;
   }
