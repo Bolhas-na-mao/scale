@@ -17,7 +17,9 @@ const renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 
-document.body.appendChild(renderer.domElement);
+document
+  .querySelector<HTMLDivElement>('#app')!
+  .appendChild(renderer.domElement);
 
 const quarkMesh = quark.get();
 
