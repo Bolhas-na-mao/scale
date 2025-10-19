@@ -18,8 +18,10 @@ import { virus } from './molecular/virus';
 import { atom } from './subatomic/atom';
 import { nucleus } from './subatomic/nucleus';
 import { quark } from './subatomic/quark';
+import { welcome } from './welcome';
 
 const list: Subject[] = [
+  welcome,
   quark,
   nucleus,
   atom,
