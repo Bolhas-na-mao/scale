@@ -47,6 +47,9 @@ function animate() {
       scale.zoom.current / 1.5,
       1 / scale.zoom.current
     );
+
+    subjects.current.rotation.x += 0.01;
+    subjects.current.rotation.y += 0.02;
   } else if (subjects.current instanceof THREE.Group) {
     subjects.current.traverse((child) => {
       if (child instanceof THREE.Mesh) {
@@ -55,6 +58,9 @@ function animate() {
           scale.zoom.current / 1.5,
           1 / scale.zoom.current
         );
+
+        child.rotation.x += 0.01;
+        child.rotation.y += 0.02;
       }
     });
   }
