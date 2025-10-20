@@ -24,6 +24,10 @@ const renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+
+scene.add(ambientLight);
+
 document
   .querySelector<HTMLDivElement>('#app')!
   .appendChild(renderer.domElement);
@@ -37,9 +41,17 @@ function animate() {
 
   renderer.render(scene, camera);
 
-  const material = subjects.current.material as THREE.MeshBasicMaterial;
-
-  material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+  if (subjects.current instanceof THREE.Mesh) {
+    const material = subjects.current.material as THREE.MeshBasicMaterial;
+    material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+  } else if (subjects.current instanceof THREE.Group) {
+    subjects.current.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        const material = child.material as THREE.MeshBasicMaterial;
+        material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+      }
+    });
+  }
 
   if (scale.zoom.current > 6 && subjects.next) {
     scene.remove(subjects.current);
