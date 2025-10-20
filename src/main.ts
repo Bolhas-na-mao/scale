@@ -48,19 +48,25 @@ function animate() {
       1 / scale.zoom.current
     );
 
-    subjects.current.rotation.x += 0.01;
-    subjects.current.rotation.y += 0.02;
+    subjects.current.rotation.x += 0.001;
+    subjects.current.rotation.y += 0.002;
   } else if (subjects.current instanceof THREE.Group) {
-    subjects.current.traverse((child) => {
-      if (child instanceof THREE.Mesh) {
-        const material = child.material as THREE.MeshBasicMaterial;
+    subjects.current.children.forEach((child, index) => {
+      if (child instanceof THREE.Mesh || child instanceof THREE.Points) {
+        const material = child.material;
+
         material.opacity = Math.min(
           scale.zoom.current / 1.5,
           1 / scale.zoom.current
         );
 
-        child.rotation.x += 0.01;
-        child.rotation.y += 0.02;
+        if (index % 2 === 0) {
+          child.rotation.x += 0.001;
+          child.rotation.y += 0.002;
+        } else {
+          child.rotation.x -= 0.001;
+          child.rotation.y -= 0.002;
+        }
       }
     });
   }
