@@ -6,7 +6,7 @@ import { subjects } from './subjects/subject';
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-  75,
+  25,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
@@ -43,12 +43,18 @@ function animate() {
 
   if (subjects.current instanceof THREE.Mesh) {
     const material = subjects.current.material as THREE.MeshBasicMaterial;
-    material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+    material.opacity = Math.min(
+      scale.zoom.current / 1.5,
+      1 / scale.zoom.current
+    );
   } else if (subjects.current instanceof THREE.Group) {
     subjects.current.traverse((child) => {
       if (child instanceof THREE.Mesh) {
         const material = child.material as THREE.MeshBasicMaterial;
-        material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+        material.opacity = Math.min(
+          scale.zoom.current / 1.5,
+          1 / scale.zoom.current
+        );
       }
     });
   }
