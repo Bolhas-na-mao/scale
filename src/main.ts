@@ -2,6 +2,7 @@ import './style.css';
 import * as THREE from 'three';
 import { scale } from './utils.ts/scale';
 import { subjects } from './subjects/subject';
+import { updateLines } from './subjects/subatomic/quark';
 
 const scene = new THREE.Scene();
 
@@ -92,6 +93,8 @@ function animate() {
   }
 
   subjects.current.scale.setScalar(scale.zoom.current);
+
+  updateLines();
 }
 
 animate();
