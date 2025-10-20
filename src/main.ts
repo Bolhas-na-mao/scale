@@ -3,6 +3,12 @@ import * as THREE from 'three';
 import { scale } from './utils.ts/scale';
 import { subjects } from './subjects/subject';
 import { updateLines } from './subjects/subatomic/quark';
+import {
+  EffectComposer,
+  RenderPass,
+  SMAAPass,
+  UnrealBloomPass,
+} from 'three/examples/jsm/Addons.js';
 
 const scene = new THREE.Scene();
 
@@ -25,6 +31,23 @@ const renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+const composer = new EffectComposer(renderer);
+
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.5,
+  1,
+  0.85
+);
+composer.addPass(bloomPass);
+
+const smaaPass = new SMAAPass();
+
+composer.addPass(smaaPass);
+
 const ambientLight = new THREE.AmbientLight(0xffffff, 1);
 
 scene.add(ambientLight);
@@ -40,7 +63,7 @@ function animate() {
 
   scale.zoom.current += (scale.zoom.target - scale.zoom.current) * 0.1;
 
-  renderer.render(scene, camera);
+  composer.render();
 
   if (subjects.current instanceof THREE.Mesh) {
     const material = subjects.current.material as THREE.MeshBasicMaterial;
