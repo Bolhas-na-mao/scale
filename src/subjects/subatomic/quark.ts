@@ -6,7 +6,7 @@ const material = new THREE.PointsMaterial({
   size: 0.02,
   sizeAttenuation: true,
   transparent: true,
-  opacity: 0.3,
+  opacity: 0.1,
 });
 
 const quark1 = new THREE.Points(geometry, material);
@@ -27,7 +27,7 @@ const lineGeometry = new THREE.BufferGeometry().setFromPoints([
 const lineMaterial = new THREE.LineBasicMaterial({
   color: 0xffffff,
   transparent: true,
-  opacity: 0.5,
+  opacity: 0.3,
 });
 
 const lines = new THREE.Line(lineGeometry, lineMaterial);
