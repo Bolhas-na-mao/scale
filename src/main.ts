@@ -2,11 +2,16 @@ import './style.css';
 import * as THREE from 'three';
 import { scale } from './utils.ts/scale';
 import { subjects } from './subjects/subject';
+import { updateLines } from './subjects/subatomic/quark';
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
 
 const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(
-  75,
+  25,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
@@ -24,6 +29,27 @@ const renderer = new THREE.WebGLRenderer();
 
 renderer.setSize(window.innerWidth, window.innerHeight);
 
+const composer = new EffectComposer(renderer);
+
+const renderPass = new RenderPass(scene, camera);
+composer.addPass(renderPass);
+
+const bloomPass = new UnrealBloomPass(
+  new THREE.Vector2(window.innerWidth, window.innerHeight),
+  0.5,
+  1,
+  0.85
+);
+composer.addPass(bloomPass);
+
+const smaaPass = new SMAAPass();
+
+composer.addPass(smaaPass);
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+
+scene.add(ambientLight);
+
 document
   .querySelector<HTMLDivElement>('#app')!
   .appendChild(renderer.domElement);
@@ -35,11 +61,37 @@ function animate() {
 
   scale.zoom.current += (scale.zoom.target - scale.zoom.current) * 0.1;
 
-  renderer.render(scene, camera);
+  composer.render();
 
-  const material = subjects.current.material as THREE.MeshBasicMaterial;
+  if (subjects.current instanceof THREE.Mesh) {
+    const material = subjects.current.material as THREE.MeshBasicMaterial;
+    material.opacity = Math.min(
+      scale.zoom.current / 1.5,
+      1 / scale.zoom.current
+    );
 
-  material.opacity = Math.min(scale.zoom.current / 1.5, 1 / scale.zoom.current);
+    subjects.current.rotation.x += 0.001;
+    subjects.current.rotation.y += 0.002;
+  } else if (subjects.current instanceof THREE.Group) {
+    subjects.current.children.forEach((child, index) => {
+      if (child instanceof THREE.Mesh || child instanceof THREE.Points) {
+        const material = child.material;
+
+        material.opacity = Math.min(
+          scale.zoom.current / 1.5,
+          1 / scale.zoom.current
+        );
+
+        if (index % 2 === 0) {
+          child.rotation.x += 0.001;
+          child.rotation.y += 0.002;
+        } else {
+          child.rotation.x -= 0.001;
+          child.rotation.y -= 0.002;
+        }
+      }
+    });
+  }
 
   if (scale.zoom.current > 6 && subjects.next) {
     scene.remove(subjects.current);
@@ -62,6 +114,8 @@ function animate() {
   }
 
   subjects.current.scale.setScalar(scale.zoom.current);
+
+  updateLines();
 }
 
 animate();
