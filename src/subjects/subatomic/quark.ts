@@ -1,6 +1,6 @@
 import * as THREE from 'three';
-import vertexShader from '../../shaders/quark/vert.glsl';
 import fragmentShader from '../../shaders/quark/frag.glsl';
+import vertexShader from '../../shaders/quark/vert.glsl';
 
 const geometry = new THREE.SphereGeometry(1, 32, 32);
 
