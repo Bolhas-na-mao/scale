@@ -4,7 +4,13 @@ import fragmentShader from '../../shaders/quark/frag.glsl';
 
 const geometry = new THREE.SphereGeometry(1, 32, 32);
 
-const material1 = new THREE.ShaderMaterial({ vertexShader, fragmentShader });
+const material1 = new THREE.ShaderMaterial({
+  vertexShader,
+  fragmentShader,
+  uniforms: {
+    uColor: { value: new THREE.Color(0x0000ff) },
+  },
+});
 const material2 = new THREE.ShaderMaterial({ vertexShader, fragmentShader });
 const material3 = new THREE.ShaderMaterial({ vertexShader, fragmentShader });
 
