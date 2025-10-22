@@ -7,4 +7,6 @@ const material = new THREE.MeshBasicMaterial({
   transparent: true,
 });
 
-export const grain = new THREE.Mesh(geometry, material);
+const entity = new THREE.Mesh(geometry, material);
+
+export const grain = { entity };

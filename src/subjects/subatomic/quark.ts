@@ -54,7 +54,7 @@ const lines = new THREE.Line(lineGeometry, lineMaterial);
 const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
 
-export function updateLines() {
+function updateLines() {
   const positions = lineGeometry.attributes.position.array as Float32Array;
   positions[0] = quark1.position.x;
   positions[1] = quark1.position.y;
@@ -71,4 +71,25 @@ export function updateLines() {
   lineGeometry.attributes.position.needsUpdate = true;
 }
 
-export const quark = group;
+function update(_deltaTime: number, scale: number) {
+  quark1.rotation.x += 0.002;
+  quark1.rotation.y += 0.003;
+
+  quark2.rotation.x -= 0.002;
+  quark2.rotation.y -= 0.003;
+
+  quark3.rotation.x -= 0.003;
+  quark3.rotation.y += 0.002;
+
+  updateLines();
+
+  [quark1, quark2, quark3].forEach((quark) => {
+    const material = quark.material as THREE.ShaderMaterial;
+    material.opacity = Math.min(scale / 1.5, 1 / scale);
+  });
+}
+
+export const quark = {
+  entity: group,
+  update,
+};
