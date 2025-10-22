@@ -1,12 +1,12 @@
-import './style.css';
 import * as THREE from 'three';
-import { scale } from './utils.ts/scale';
-import { subjects } from './subjects/subject';
-import { updateLines } from './subjects/subatomic/quark';
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass.js';
-import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
 import { SMAAPass } from 'three/examples/jsm/postprocessing/SMAAPass.js';
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass.js';
+import './style.css';
+import { updateLines } from './subjects/subatomic/quark';
+import { subjects } from './subjects/subject';
+import { scale } from './utils.ts/scale';
 
 const scene = new THREE.Scene();
 
