@@ -1,4 +1,3 @@
-
 uniform vec3 uColor;
 
 void main() {
