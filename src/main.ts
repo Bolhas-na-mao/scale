@@ -83,12 +83,19 @@ function animate() {
           1 / scale.zoom.current
         );
 
-        if (index % 2 === 0) {
-          child.rotation.x += 0.001;
+        if (index === 0) {
+          child.rotation.x += 0.002;
+          child.rotation.y += 0.003;
+        }
+
+        if (index === 1) {
+          child.rotation.x -= 0.002;
+          child.rotation.y -= 0.003;
+        }
+
+        if (index === 2) {
+          child.rotation.x -= 0.003;
           child.rotation.y += 0.002;
-        } else {
-          child.rotation.x -= 0.001;
-          child.rotation.y -= 0.002;
         }
       }
     });
