@@ -3,5 +3,9 @@ float random(vec2 st) {
 }
 
 void main() {
-  gl_FragColor = vec4(0.0, 0.0, 1.0, 1.0);
+  vec2 coordinates = gl_FragCoord.xy;
+
+  float random_number = random(coordinates);
+
+  gl_FragColor = vec4(0.0, 0.0, 1.0, float(random_number));
 }
