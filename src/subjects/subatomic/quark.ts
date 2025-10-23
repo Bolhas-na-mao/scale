@@ -55,20 +55,12 @@ const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
 
 function updateLines() {
-  const positions = lineGeometry.attributes.position.array as Float32Array;
-  positions[0] = quark1.position.x;
-  positions[1] = quark1.position.y;
-  positions[2] = quark1.position.z;
-  positions[3] = quark2.position.x;
-  positions[4] = quark2.position.y;
-  positions[5] = quark2.position.z;
-  positions[6] = quark3.position.x;
-  positions[7] = quark3.position.y;
-  positions[8] = quark3.position.z;
-  positions[9] = quark1.position.x;
-  positions[10] = quark1.position.y;
-  positions[11] = quark1.position.z;
-  lineGeometry.attributes.position.needsUpdate = true;
+  const attr = lineGeometry.getAttribute('position') as THREE.BufferAttribute;
+  attr.setXYZ(0, quark1.position.x, quark1.position.y, quark1.position.z);
+  attr.setXYZ(1, quark2.position.x, quark2.position.y, quark2.position.z);
+  attr.setXYZ(2, quark3.position.x, quark3.position.y, quark3.position.z);
+  attr.setXYZ(3, quark1.position.x, quark1.position.y, quark1.position.z);
+  attr.needsUpdate = true;
 }
 
 function update(_deltaTime: number, scale: number) {
