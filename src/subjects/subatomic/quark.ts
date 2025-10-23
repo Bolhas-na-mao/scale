@@ -54,15 +54,6 @@ const lines = new THREE.Line(lineGeometry, lineMaterial);
 const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
 
-function updateLines() {
-  const attr = lineGeometry.getAttribute('position') as THREE.BufferAttribute;
-  attr.setXYZ(0, quark1.position.x, quark1.position.y, quark1.position.z);
-  attr.setXYZ(1, quark2.position.x, quark2.position.y, quark2.position.z);
-  attr.setXYZ(2, quark3.position.x, quark3.position.y, quark3.position.z);
-  attr.setXYZ(3, quark1.position.x, quark1.position.y, quark1.position.z);
-  attr.needsUpdate = true;
-}
-
 function update(_deltaTime: number, scale: number) {
   quark1.rotation.x += 0.002;
   quark1.rotation.y += 0.003;
@@ -72,8 +63,6 @@ function update(_deltaTime: number, scale: number) {
 
   quark3.rotation.x -= 0.003;
   quark3.rotation.y += 0.002;
-
-  updateLines();
 
   [quark1, quark2, quark3].forEach((quark) => {
     const material = quark.material as THREE.ShaderMaterial;
