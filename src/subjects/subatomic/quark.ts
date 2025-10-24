@@ -10,6 +10,9 @@ const material1 = new THREE.ShaderMaterial({
   uniforms: {
     uColor: { value: new THREE.Color(0, 0, 1) },
   },
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
 });
 
 const material2 = new THREE.ShaderMaterial({

@@ -36,6 +36,7 @@ const bloomPass = new UnrealBloomPass(
   0.6,
   0.85
 );
+
 composer.addPass(bloomPass);
 
 const smaaPass = new SMAAPass();
