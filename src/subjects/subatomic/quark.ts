@@ -53,16 +53,16 @@ const lineGeometry = new THREE.BufferGeometry().setFromPoints([
   quark1.position,
   quark2.position,
   quark3.position,
-  quark1.position,
 ]);
 
 const lineMaterial = new THREE.LineBasicMaterial({
   color: 0xffffff,
   transparent: true,
   opacity: 0.3,
+  depthWrite: false,
 });
 
-const lines = new THREE.Line(lineGeometry, lineMaterial);
+const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
 
 const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
