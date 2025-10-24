@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import fragmentShader from '../../shaders/quark/frag.glsl';
 import vertexShader from '../../shaders/quark/vert.glsl';
 
+const clock = new THREE.Clock();
 const geometry = new THREE.SphereGeometry(1, 32, 32);
 
 const material1 = new THREE.ShaderMaterial({
@@ -67,6 +68,7 @@ const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
 
 function update(_deltaTime: number, scale: number) {
+  const elapsedTime = clock.getElapsedTime();
   quark1.rotation.x += 0.002;
   quark1.rotation.y += 0.003;
 
@@ -79,6 +81,7 @@ function update(_deltaTime: number, scale: number) {
   [quark1, quark2, quark3].forEach((quark) => {
     const material = quark.material as THREE.ShaderMaterial;
     material.opacity = Math.min(scale / 1.5, 1 / scale);
+    material.uniforms.uTime.value = elapsedTime;
   });
 }
 
