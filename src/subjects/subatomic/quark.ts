@@ -9,8 +9,9 @@ const material1 = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
-    uColor: { value: new THREE.Color(0.5, 1, 0.5).multiplyScalar(1.3) },
+    uColor: { value: new THREE.Color(0.5, 1, 0.5).multiplyScalar(1.6) },
     uTime: { value: 0 },
+    uCameraPosition: { value: new THREE.Vector3() },
   },
   transparent: true,
   depthWrite: false,
@@ -21,8 +22,9 @@ const material2 = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
-    uColor: { value: new THREE.Color(0.5, 0.5, 1).multiplyScalar(2.0) },
+    uColor: { value: new THREE.Color(0.5, 0.5, 1).multiplyScalar(2.6) },
     uTime: { value: 0 },
+    uCameraPosition: { value: new THREE.Vector3() },
   },
   transparent: true,
   depthWrite: false,
@@ -35,6 +37,7 @@ const material3 = new THREE.ShaderMaterial({
   uniforms: {
     uColor: { value: new THREE.Color(1, 0.5, 0.5).multiplyScalar(2.2) },
     uTime: { value: 0 },
+    uCameraPosition: { value: new THREE.Vector3() },
   },
   transparent: true,
   depthWrite: false,
@@ -67,7 +70,7 @@ const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
 const group = new THREE.Group();
 group.add(quark1, quark2, quark3, lines);
 
-function update(_deltaTime: number, scale: number) {
+function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
   quark1.rotation.x += 0.002;
   quark1.rotation.y += 0.003;
@@ -82,6 +85,7 @@ function update(_deltaTime: number, scale: number) {
     const material = quark.material as THREE.ShaderMaterial;
     material.opacity = Math.min(scale / 1.5, 1 / scale);
     material.uniforms.uTime.value = elapsedTime;
+    material.uniforms.uCameraPosition.value.copy(camera.position);
   });
 }
 
