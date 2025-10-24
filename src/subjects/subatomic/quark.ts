@@ -8,7 +8,7 @@ const material1 = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
-    uColor: { value: new THREE.Color(0, 0, 1) },
+    uColor: { value: new THREE.Color(0.5, 1, 0.5).multiplyScalar(1.3) },
   },
   transparent: true,
   depthWrite: false,
@@ -19,21 +19,27 @@ const material2 = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
-    uColor: { value: new THREE.Color(0, 1, 0) },
+    uColor: { value: new THREE.Color(0.5, 0.5, 1).multiplyScalar(2.0) },
   },
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
 });
 
 const material3 = new THREE.ShaderMaterial({
   vertexShader,
   fragmentShader,
   uniforms: {
-    uColor: { value: new THREE.Color(1, 0, 0) },
+    uColor: { value: new THREE.Color(1, 0.5, 0.5).multiplyScalar(2.2) },
   },
+  transparent: true,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
 });
 
-const quark1 = new THREE.Points(geometry, material1);
-const quark2 = new THREE.Points(geometry, material2);
-const quark3 = new THREE.Points(geometry, material3);
+const quark1 = new THREE.Mesh(geometry, material1);
+const quark2 = new THREE.Mesh(geometry, material2);
+const quark3 = new THREE.Mesh(geometry, material3);
 
 quark1.position.set(6, 2, 0);
 quark2.position.set(3, -1.5, 0);
