@@ -32,10 +32,11 @@ composer.addPass(renderPass);
 
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.5,
-  1,
-  0.85
+  1.5,
+  0.4,
+  1.2
 );
+
 composer.addPass(bloomPass);
 
 const smaaPass = new SMAAPass();
@@ -60,7 +61,7 @@ function animate(time: number) {
 
   scale.zoom.current += (scale.zoom.target - scale.zoom.current) * 0.1;
 
-  subjects.current.update?.(deltaTime, scale.zoom.current);
+  subjects.current.update?.(deltaTime, scale.zoom.current, camera);
 
   if (scale.zoom.current > 6 && subjects.next) {
     subjects.current.onExit?.();
