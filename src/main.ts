@@ -32,8 +32,8 @@ composer.addPass(renderPass);
 
 const bloomPass = new UnrealBloomPass(
   new THREE.Vector2(window.innerWidth, window.innerHeight),
-  0.5,
-  1,
+  0.4,
+  0.6,
   0.85
 );
 composer.addPass(bloomPass);
