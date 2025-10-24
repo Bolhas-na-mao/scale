@@ -9,6 +9,7 @@ const material1 = new THREE.ShaderMaterial({
   fragmentShader,
   uniforms: {
     uColor: { value: new THREE.Color(0.5, 1, 0.5).multiplyScalar(1.3) },
+    uTime: { value: 0 },
   },
   transparent: true,
   depthWrite: false,
@@ -20,6 +21,7 @@ const material2 = new THREE.ShaderMaterial({
   fragmentShader,
   uniforms: {
     uColor: { value: new THREE.Color(0.5, 0.5, 1).multiplyScalar(2.0) },
+    uTime: { value: 0 },
   },
   transparent: true,
   depthWrite: false,
@@ -31,6 +33,7 @@ const material3 = new THREE.ShaderMaterial({
   fragmentShader,
   uniforms: {
     uColor: { value: new THREE.Color(1, 0.5, 0.5).multiplyScalar(2.2) },
+    uTime: { value: 0 },
   },
   transparent: true,
   depthWrite: false,
