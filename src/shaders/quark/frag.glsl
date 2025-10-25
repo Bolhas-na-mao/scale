@@ -6,7 +6,9 @@ varying vec3 vPosition; // posição da superfície
 void main() {
   vec3 viewDirection = normalize(uCameraPosition - vPosition);
 
-  float fresnel = dot(viewDirection, vNormal);
+  vec3 normal = normalize(vNormal);
+
+  float fresnel = dot(viewDirection, normal);
 
   fresnel = clamp(1.0 - fresnel, 0.2, 1.0);
 
