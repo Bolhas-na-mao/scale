@@ -78,13 +78,8 @@ function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
 
   [quark1, quark2, quark3].forEach((quark) => {
-    if (Math.ceil(elapsedTime) % 2 === 0) {
-      quark.rotation.x += 0.001;
-      quark.rotation.y -= 0.001;
-    } else {
-      quark.rotation.x -= 0.001;
-      quark.rotation.y += 0.001;
-    }
+    quark.rotation.x += 0.002;
+    quark.rotation.y += 0.003;
 
     const material = quark.material as THREE.ShaderMaterial;
     material.opacity = Math.min(scale / 1.5, 1 / scale);
