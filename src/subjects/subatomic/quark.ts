@@ -72,14 +72,6 @@ group.add(quark1, quark2, quark3, lines);
 
 function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
-  quark1.rotation.x += 0.002;
-  quark1.rotation.y += 0.003;
-
-  quark2.rotation.x -= 0.002;
-  quark2.rotation.y -= 0.003;
-
-  quark3.rotation.x -= 0.003;
-  quark3.rotation.y += 0.002;
 
   [quark1, quark2, quark3].forEach((quark) => {
     const material = quark.material as THREE.ShaderMaterial;

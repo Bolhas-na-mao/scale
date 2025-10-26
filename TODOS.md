@@ -1,0 +1,2 @@
+- [ ] Add scale counter with a slider to jump
+- [ ] Delete TODOS.md
