@@ -8,6 +8,23 @@ import { subjects } from './subjects/subject';
 import { scale } from './utils.ts/scale';
 
 const scene = new THREE.Scene();
+
+const canvas = document.createElement('canvas');
+canvas.width = 256;
+canvas.height = 256;
+
+const ctx = canvas.getContext('2d');
+
+if (ctx) {
+  const gradient = ctx.createLinearGradient(0, 0, 0, 256);
+  gradient.addColorStop(0, 'oklch(0.14 0.03 282)');
+  gradient.addColorStop(1, 'oklch(0.10 0.05 268)');
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, 256, 256);
+}
+
+scene.background = new THREE.CanvasTexture(canvas);
+
 const camera = new THREE.PerspectiveCamera(
   25,
   window.innerWidth / window.innerHeight,
@@ -21,7 +38,7 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-camera.position.z = 5;
+camera.position.z = 20;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
