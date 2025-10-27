@@ -17,8 +17,8 @@ const ctx = canvas.getContext('2d');
 
 if (ctx) {
   const gradient = ctx.createLinearGradient(0, 0, 0, 256);
-  gradient.addColorStop(0, 'oklch(0.18 0.03 282)');
-  gradient.addColorStop(1, 'oklch(0.13 0.05 268)');
+  gradient.addColorStop(0, 'oklch(0.14 0.03 282)');
+  gradient.addColorStop(1, 'oklch(0.10 0.05 268)');
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, 256, 256);
 }
@@ -38,7 +38,7 @@ window.addEventListener('resize', () => {
   renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-camera.position.z = 5;
+camera.position.z = 20;
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
