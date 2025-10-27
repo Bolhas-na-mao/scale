@@ -59,29 +59,27 @@ const lineGeometry = new THREE.BufferGeometry().setFromPoints([
 ]);
 
 const lineMaterial = new THREE.LineBasicMaterial({
-  color: 0xffffff,
   transparent: true,
-  opacity: 0.3,
   depthWrite: false,
+  linewidth: 4,
+  opacity: 0.7,
+  blending: THREE.AdditiveBlending,
 });
 
 const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
 
+lines.renderOrder = 1;
+
 const group = new THREE.Group();
-group.add(quark1, quark2, quark3, lines);
+group.add(lines, quark1, quark2, quark3);
 
 function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
-  quark1.rotation.x += 0.002;
-  quark1.rotation.y += 0.003;
-
-  quark2.rotation.x -= 0.002;
-  quark2.rotation.y -= 0.003;
-
-  quark3.rotation.x -= 0.003;
-  quark3.rotation.y += 0.002;
 
   [quark1, quark2, quark3].forEach((quark) => {
+    quark.rotation.x += 0.002;
+    quark.rotation.y += 0.003;
+
     const material = quark.material as THREE.ShaderMaterial;
     material.opacity = Math.min(scale / 1.5, 1 / scale);
     material.uniforms.uTime.value = elapsedTime;

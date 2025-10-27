@@ -1,0 +1,3 @@
+- [ ] Add scale counter with a slider to jump
+- [ ] Add stars to the background
+- [ ] Delete TODOS.md
