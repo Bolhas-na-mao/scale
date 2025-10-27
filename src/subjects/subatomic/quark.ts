@@ -61,10 +61,9 @@ const lineGeometry = new THREE.BufferGeometry().setFromPoints([
 const lineMaterial = new THREE.LineBasicMaterial({
   transparent: true,
   depthWrite: false,
-  linewidth: 3,
+  linewidth: 4,
+  opacity: 0.7,
   blending: THREE.AdditiveBlending,
-  opacity: 0.6,
-  linejoin: 'round',
 });
 
 const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
