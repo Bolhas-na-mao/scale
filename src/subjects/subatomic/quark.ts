@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import fragmentShader from '../../shaders/quark/frag.glsl';
 import vertexShader from '../../shaders/quark/vert.glsl';
+import { square } from '../../texts/square';
 
 const clock = new THREE.Clock();
 const geometry = new THREE.SphereGeometry(1, 32, 32);
@@ -71,7 +72,7 @@ const lines = new THREE.LineLoop(lineGeometry, lineMaterial);
 lines.renderOrder = 1;
 
 const group = new THREE.Group();
-group.add(lines, quark1, quark2, quark3);
+group.add(lines, quark1, quark2, quark3, square);
 
 function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
