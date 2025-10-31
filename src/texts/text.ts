@@ -27,7 +27,6 @@ export async function createText({
         const material = new THREE.MeshBasicMaterial({
           color: 0xffffff,
           transparent: true,
-          opacity: 0.8,
           blending: THREE.AdditiveBlending,
         });
 
