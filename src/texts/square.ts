@@ -6,6 +6,7 @@ const points = [
   new THREE.Vector3(3.0, 3.0, 0),
   new THREE.Vector3(-3.0, 3.0, 0),
 ];
+
 const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
 const material = new THREE.LineBasicMaterial({
