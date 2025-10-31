@@ -11,17 +11,17 @@ export async function createText({
 
   return new Promise((resolve, reject) => {
     loader.load(
-      '/dm_mono.json',
+      '/dm_mono_light.json',
       function (font) {
         const geometry = new TextGeometry(text, {
           font,
           size: 0.5,
           depth: 0.1,
-          curveSegments: 12,
+          curveSegments: 32,
           bevelEnabled: true,
           bevelThickness: 0.02,
           bevelSize: 0.01,
-          bevelSegments: 3,
+          bevelSegments: 5,
         });
 
         const material = new THREE.MeshBasicMaterial({
