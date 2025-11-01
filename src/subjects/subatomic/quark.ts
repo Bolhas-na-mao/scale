@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import fragmentShader from '../../shaders/quark/frag.glsl';
 import vertexShader from '../../shaders/quark/vert.glsl';
-import { createText } from '../../texts/text';
-import { square } from '../../texts/square';
+import { createLabel } from '../../texts/label';
 
 const clock = new THREE.Clock();
 const geometry = new THREE.SphereGeometry(1, 32, 32);
@@ -74,9 +73,18 @@ lines.renderOrder = 1;
 
 const group = new THREE.Group();
 
-const text = await createText({ text: 'Quarks' });
+const label = await createLabel({
+  title: 'Quarks',
+  content:
+    'As partes mais fundamentais da matéria. Sempre estão grudadas em grupos de três, formando os prótons e nêutrons que compõem o núcleo de todos os átomos.',
+  titleFontSize: 0.5,
+  contentFontSize: 0.2,
+  squareSize: 6,
+  position: new THREE.Vector3(-6, 0, 0),
+  rotation: new THREE.Euler(-0.2, 0.2, 0),
+});
 
-group.add(lines, quark1, quark2, quark3, text, square);
+group.add(lines, quark1, quark2, quark3, label);
 
 function update(_deltaTime: number, scale: number, camera: THREE.Camera) {
   const elapsedTime = clock.getElapsedTime();
