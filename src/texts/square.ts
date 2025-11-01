@@ -1,24 +1,35 @@
 import * as THREE from 'three';
 
-const points = [
-  new THREE.Vector3(-3.0, -3.0, 0),
-  new THREE.Vector3(3.0, -3.0, 0),
-  new THREE.Vector3(3.0, 3.0, 0),
-  new THREE.Vector3(-3.0, 3.0, 0),
-];
+export function createSquare({
+  size = 6,
+  position = new THREE.Vector3(0, 0, 0),
+  rotation = new THREE.Euler(0, 0, 0),
+}: {
+  size?: number;
+  position?: THREE.Vector3;
+  rotation?: THREE.Euler;
+} = {}): THREE.LineLoop {
+  const halfSize = size / 2;
 
-const geometry = new THREE.BufferGeometry().setFromPoints(points);
+  const points = [
+    new THREE.Vector3(-halfSize, -halfSize, 0),
+    new THREE.Vector3(halfSize, -halfSize, 0),
+    new THREE.Vector3(halfSize, halfSize, 0),
+    new THREE.Vector3(-halfSize, halfSize, 0),
+  ];
 
-const material = new THREE.LineBasicMaterial({
-  transparent: true,
-  depthWrite: false,
-  blending: THREE.AdditiveBlending,
-});
+  const geometry = new THREE.BufferGeometry().setFromPoints(points);
 
-const square = new THREE.LineLoop(geometry, material);
+  const material = new THREE.LineBasicMaterial({
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
 
-square.position.set(-6, 0, 0);
-square.rotation.x = -0.2;
-square.rotation.y = 0.2;
+  const square = new THREE.LineLoop(geometry, material);
 
-export { square };
+  square.position.copy(position);
+  square.rotation.copy(rotation);
+
+  return square;
+}
